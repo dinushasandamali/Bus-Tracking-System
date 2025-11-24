@@ -26,6 +26,12 @@ namespace backend.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register(RegisterDto dto)
         {
+            // Allowed roles
+            var validRoles = new[] { "Admin", "Driver", "Conductor", "Dispatcher", "User" };
+
+            if (!validRoles.Contains(dto.Role))
+                return BadRequest(new { message = "Invalid role. Allowed roles: Admin, Driver, Conductor, Dispatcher, User" });
+
             if (await _db.Users.AnyAsync(u => u.Username == dto.Username))
                 return BadRequest(new { message = "Username taken" });
 
@@ -38,13 +44,20 @@ namespace backend.Controllers
                 Username = dto.Username,
                 Email = dto.Email,
                 PasswordHash = BCrypt.Net.BCrypt.HashPassword(dto.Password),
-                Role = "User",
+                Role = dto.Role,   // ← Save selected role
                 CreatedAt = DateTime.UtcNow
             };
 
             _db.Users.Add(user);
             await _db.SaveChangesAsync();
-            return Ok(new { user.Id, user.Username, user.Email });
+
+            return Ok(new 
+            { 
+                user.Id, 
+                user.Username, 
+                user.Email, 
+                user.Role 
+            });
         }
 
         [HttpPost("login")]
