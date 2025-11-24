@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\dinus\\OneDrive\\Desktop\\Bus Tracking System\\Bus-Tracking-System\\backend\\backend.csproj": {}
+    "C:\\Users\\osand\\Bus-Tracking-System\\backend\\backend.csproj": {}
   },
   "projects": {
-    "C:\\Users\\dinus\\OneDrive\\Desktop\\Bus Tracking System\\Bus-Tracking-System\\backend\\backend.csproj": {
+    "C:\\Users\\osand\\Bus-Tracking-System\\backend\\backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\dinus\\OneDrive\\Desktop\\Bus Tracking System\\Bus-Tracking-System\\backend\\backend.csproj",
+        "projectUniqueName": "C:\\Users\\osand\\Bus-Tracking-System\\backend\\backend.csproj",
         "projectName": "backend",
-        "projectPath": "C:\\Users\\dinus\\OneDrive\\Desktop\\Bus Tracking System\\Bus-Tracking-System\\backend\\backend.csproj",
-        "packagesPath": "C:\\Users\\dinus\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\dinus\\OneDrive\\Desktop\\Bus Tracking System\\Bus-Tracking-System\\backend\\obj\\",
+        "projectPath": "C:\\Users\\osand\\Bus-Tracking-System\\backend\\backend.csproj",
+        "packagesPath": "C:\\Users\\osand\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\osand\\Bus-Tracking-System\\backend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\dinus\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\osand\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -65,7 +65,7 @@
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
-              "version": "[6.6.0, )"
+              "version": "[6.6.1, )"
             }
           },
           "imports": [
@@ -87,7 +87,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files (x86)\\dotnet\\sdk\\8.0.416/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.416/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
