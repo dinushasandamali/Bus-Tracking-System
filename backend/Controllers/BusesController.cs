@@ -21,8 +21,15 @@ namespace backend.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var buses = await _db.Buses.ToListAsync();
-            return Ok(buses);
+            try
+            {
+                var buses = await _db.Buses.ToListAsync();
+                return Ok(buses);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Error retrieving buses", error = ex.Message });
+            }
         }
 
         // GET: api/buses/{id}
