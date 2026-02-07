@@ -1,0 +1,38 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer utilities {
+  .gradient-text {
+    background: linear-gradient(to right, #2563eb, #9333ea, #ec4899);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+  
+  .gradient-bg-primary {
+    background: linear-gradient(to right, #2563eb, #9333ea);
+  }
+  
+  .gradient-bg-secondary {
+    background: linear-gradient(to right, #9333ea, #ec4899);
+  }
+  
+  .gradient-bg-accent {
+    background: linear-gradient(to right, #ec4899, #e11d48);
+  }
+  
+  .shadow-glow {
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+  }
+  
+  .shadow-glow-lg {
+    box-shadow: 0 0 30px rgba(139, 92, 246, 0.4);
+  }
+}

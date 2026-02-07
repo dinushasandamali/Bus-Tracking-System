@@ -8,8 +8,8 @@ namespace backend.Models
     public class Trip
     {
         public Guid Id { get; set; }
-        public Guid RouteId { get; set; }
-        public Route Route { get; set; } = null!;
+        public Guid BusRouteId { get; set; }
+        public BusRoute BusRoute { get; set; } = null!;
         public Guid BusId { get; set; }
         public Bus Bus { get; set; } = null!;
         public DateTime StartTime { get; set; }

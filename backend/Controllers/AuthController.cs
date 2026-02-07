@@ -23,17 +23,20 @@ namespace backend.Controllers
             _config = config;
         }
 
+        // TEST ENDPOINT FOR FRONTEND CONNECTION
+        [HttpGet("test")]
+        public IActionResult Test() => Ok("Backend is connected!");
+
         [HttpPost("register")]
         public async Task<IActionResult> Register(RegisterDto dto)
         {
-            // Allowed roles
-            var validRoles = new[] { "Admin", "Driver", "Conductor", "Dispatcher", "User" };
+            var validRoles = new[] { "Admin", "Driver", "Conductor", "Owner", "Passenger" };
 
             if (!validRoles.Contains(dto.Role))
-                return BadRequest(new { message = "Invalid role. Allowed roles: Admin, Driver, Conductor, Dispatcher, User" });
+                return BadRequest(new { message = "Invalid role. Allowed roles: Admin, Driver, Conductor, Owner, Passenger" });
 
             if (await _db.Users.AnyAsync(u => u.Username == dto.Username))
-                return BadRequest(new { message = "Username taken" });
+                return BadRequest(new { message = "Username already taken" });
 
             if (await _db.Users.AnyAsync(u => u.Email == dto.Email))
                 return BadRequest(new { message = "Email already registered" });
@@ -44,20 +47,14 @@ namespace backend.Controllers
                 Username = dto.Username,
                 Email = dto.Email,
                 PasswordHash = BCrypt.Net.BCrypt.HashPassword(dto.Password),
-                Role = dto.Role,   // ← Save selected role
+                Role = dto.Role,
                 CreatedAt = DateTime.UtcNow
             };
 
             _db.Users.Add(user);
             await _db.SaveChangesAsync();
 
-            return Ok(new 
-            { 
-                user.Id, 
-                user.Username, 
-                user.Email, 
-                user.Role 
-            });
+            return Ok(new { user.Id, user.Username, user.Email, user.Role });
         }
 
         [HttpPost("login")]
@@ -74,9 +71,9 @@ namespace backend.Controllers
                 new Claim(ClaimTypes.Role, user.Role)
             };
 
-            var jwtKey = _config["Jwt:Key"] ?? throw new InvalidOperationException("JWT Key is not configured");
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]!));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
             var token = new JwtSecurityToken(
                 claims: claims,
                 expires: DateTime.UtcNow.AddDays(7),
